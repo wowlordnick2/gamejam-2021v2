@@ -10,3 +10,9 @@ commands:
     aliases: [e]
     permission: "event.start"
     permission-message: "§cDu hast keine Rechte um das Event zu starten!"
+
+  startevent:
+    description: "Startet das Spiel"
+    aliases: [s]
+    permission: "start.start"
+    permission-message: "§cDu hast keine Rechte um das Spiel zu starten!"

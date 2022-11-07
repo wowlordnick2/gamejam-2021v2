@@ -1,6 +1,7 @@
 package de.wowlordnick2;
 
 import de.wowlordnick2.commands.CallEvent;
+import de.wowlordnick2.commands.startEvent;
 import de.wowlordnick2.events.TestEvent;
 import de.wowlordnick2.utils.EventsManger;
 import org.bukkit.ChatColor;
@@ -22,9 +23,10 @@ public final class Main extends JavaPlugin {
         EventsManger.registerEvents(new TestEvent());
 
         getCommand("event").setExecutor(new CallEvent());
+        getCommand("startevent").setExecutor(new startEvent());
 
 
-        prefix = color("&a&lEvent &8» &7");
+        prefix = color("&a&lEvent Sytem &8» &7");
     }
 
     @Override

@@ -1,10 +1,11 @@
-package de.wowlordnick2.utils;
+package de.wowlordnick2.utils.Enums;
 
 public enum EventsDifficulties {
 
     FAST(60),
     NORMAL(300),
     SLOW(600);
+
 
     EventsDifficulties(int nextEventTime) {
 

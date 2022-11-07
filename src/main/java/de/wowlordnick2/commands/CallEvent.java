@@ -15,6 +15,9 @@ import java.util.List;
 
 public class CallEvent implements CommandExecutor , TabCompleter {
 
+    /**
+     * This command is used to call the events from the EventsManger class
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
@@ -30,7 +33,7 @@ public class CallEvent implements CommandExecutor , TabCompleter {
                     id = Integer.parseInt(args[0]);
                 } catch(NumberFormatException ex){ // handle your exception
 
-                  player.sendMessage(Main.color("&cThis is not a number"));
+                  player.sendMessage(Main.color(Main.getPrefix() + "&cThis is not a number"));
 
                   return true;
                 }
@@ -40,7 +43,7 @@ public class CallEvent implements CommandExecutor , TabCompleter {
 
                     EventsManger.callEvent(id);
                 } else {
-                    sender.sendMessage("§cThis event does not exist");
+                    sender.sendMessage(Main.color(Main.getPrefix() + "&cThis event does not exist"));
                     return true;
                 }
 
@@ -57,6 +60,10 @@ public class CallEvent implements CommandExecutor , TabCompleter {
         return false;
     }
 
+
+    /**
+     * This method is used to get the tab complete for the command
+     */
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
 

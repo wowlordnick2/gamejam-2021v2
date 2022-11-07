@@ -14,7 +14,7 @@ public class TestEvent extends EventsManger {
         System.out.println("Event started " + eventTitle() + " " + positive());
 
         Bukkit.getOnlinePlayers().forEach(player -> {
-            player.sendMessage(Main.color("&aEvent started " + eventTitle() + " " + positive()));
+            player.sendMessage(Main.color(Main.getPrefix() + "startet" + eventTitle() + " " + positive()));
         });
 
     }
