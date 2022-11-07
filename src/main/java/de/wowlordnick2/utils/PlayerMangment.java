@@ -1,4 +1,4 @@
-package de.wowlordnick2;
+package de.wowlordnick2.utils;
 
 import org.bukkit.entity.Player;
 

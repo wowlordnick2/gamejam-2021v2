@@ -3,3 +3,10 @@ version: '${version}'
 main: de.wowlordnick2.Main
 api-version: 1.16
 authors: [ Lordlorse, Ohnonick2 ]
+
+commands:
+  event:
+    description: "Startet ein Event"
+    aliases: [e]
+    permission: "event.start"
+    permission-message: "§cDu hast keine Rechte um das Event zu starten!"

@@ -1,7 +1,7 @@
-package de.wowlordnick2;
+package de.wowlordnick2.utils;
 
+import de.wowlordnick2.Main;
 import net.kyori.adventure.text.Component;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer {
