@@ -25,6 +25,11 @@ public class startEvent implements CommandExecutor , TabCompleter {
 
             Player player = (Player) sender;
 
+            if (args.length == 0) {
+                player.sendMessage(Main.color(prefix + "&cPlease use /startEvent <difficulty>"));
+                return true;
+            }
+
 
             if (args.length == 1) {
 

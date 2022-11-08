@@ -1,11 +1,22 @@
 package de.wowlordnick2.utils;
 
+import de.wowlordnick2.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class EventsManger {
+
+    public BossBar bossBar = null;
+
 
     /**
      * @param playerList
@@ -27,15 +38,40 @@ public abstract class EventsManger {
      */
     public void onDisable() {
         System.out.println("Event stopped" + eventTitle());
+
+        new BukkitRunnable() {
+            int i = 0;
+            @Override
+            public void run() {
+
+
+
+                if (i > 5) {
+                    cancel();
+
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        bossBar.removePlayer(player);
+                    });
+
+                }
+                i++;
+
+            }
+        }.runTaskTimerAsynchronously(Main.getInstance(), 0, 20);
+
     }
     /**
      * Return the name of the event
      */
     public abstract String eventTitle();
+
     /**
      * Return the value of the event (positive or negative)
      */
-    public abstract boolean positive();
+    public static boolean positive() {
+        return false;
+    }
+
     /**
      * Return the ItemStack of the event
      */
@@ -99,6 +135,23 @@ public abstract class EventsManger {
 
 
     }
+
+
+    public void sendBossBar() {
+
+
+
+        if(positive()){
+            bossBar = Bukkit.createBossBar(eventTitle(), BarColor.GREEN, BarStyle.SOLID, BarFlag.DARKEN_SKY, BarFlag.CREATE_FOG);
+        }else{
+            bossBar = Bukkit.createBossBar(eventTitle(), BarColor.PURPLE, BarStyle.SOLID, BarFlag.DARKEN_SKY, BarFlag.CREATE_FOG);
+        }
+
+        BossBar finalBossBar = bossBar;
+        Bukkit.getOnlinePlayers().forEach(finalBossBar::addPlayer);
+
+    }
+
 
 
 

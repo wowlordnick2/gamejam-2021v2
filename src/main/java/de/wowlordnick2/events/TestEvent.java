@@ -12,20 +12,23 @@ public class TestEvent extends EventsManger {
     @Override
     public void onEnable() {
         System.out.println("Event started " + eventTitle() + " " + positive());
-
+        sendBossBar();
         Bukkit.getOnlinePlayers().forEach(player -> {
             player.sendMessage(Main.color(Main.getPrefix() + "startet" + eventTitle() + " " + positive()));
         });
 
+
+
+        onDisable();
     }
 
 
     public String eventTitle() {
-        return ChatColor.DARK_AQUA + "Test Event";
+        return ChatColor.DARK_AQUA + " Test Event";
     }
 
 
-    public boolean positive() {
+    public static boolean positive() {
         return true;
     }
 

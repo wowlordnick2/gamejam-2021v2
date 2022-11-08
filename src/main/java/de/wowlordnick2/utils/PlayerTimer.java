@@ -2,9 +2,10 @@ package de.wowlordnick2.utils;
 
 import de.wowlordnick2.Main;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class Timer {
+public class PlayerTimer {
 
 
     public static boolean isRunning = false;
@@ -20,46 +21,52 @@ public class Timer {
      * Start the timer
      */
 
-    public void Timer(){
+    public static  void Timer(){
 
 
         new BukkitRunnable() {
             @Override
             public void run() {
-
                 if (isRunning) {
                     if (UP) {
-                        sec++;
                         if (sec == 60) {
                             sec = 0;
                             min++;
-                        }
-                        if (min == 60) {
+                        } else if (min == 60) {
                             min = 0;
                             hour++;
+                        } else {
+                            sec++;
                         }
                     } else {
-                        sec--;
-                        if (sec == -1) {
+                        if (sec == 0) {
                             sec = 59;
                             min--;
-                        }
-                        if (min == -1) {
+                        } else if (min == 0) {
+                            sec = 59;
+                            sec--;
+                        } else if (hour == 0) {
+                            hour = 0;
                             min = 59;
-                            hour--;
+                            sec = 59;
+                        } else if (sec == 0 && min == 0 && hour == 0) {
+                            cancel();
+                        } else {
+                            sec--;
                         }
                     }
                 }
+                if (showTimer) {
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        player.sendActionBar(Component.text(Main.color("&7Timer: &e" + hour + ":" + min + ":" + sec  + EventTimer.getEventTimer())));
+                    });
 
-                PlayerMangment.playerList.forEach(player -> {
+                }
 
-                    if (showTimer) {
-                        player.sendActionBar(Component.text("Timer: " + hour + ":" + min + ":" + sec));
-                    }
-                });
+
 
             }
-        }.runTaskTimerAsynchronously(Main.getPlugin(Main.class) , 0 , 20);
+        }.runTaskTimerAsynchronously(Main.getInstance() , 0 , 20);
 
     }
 
@@ -74,16 +81,16 @@ public class Timer {
      * set the timer
      */
     public static void setTimer(int hour , int min , int sec) {
-        Timer.hour = hour;
-        Timer.min = min;
-        Timer.sec = sec;
+        PlayerTimer.hour = hour;
+        PlayerTimer.min = min;
+        PlayerTimer.sec = sec;
     }
 
     /**
      * set the timer to up or down
      */
     public static void setUP(boolean UP) {
-        Timer.UP = UP;
+        PlayerTimer.UP = UP;
     }
 
     /**
@@ -92,6 +99,8 @@ public class Timer {
     public static void setRunning(boolean running) {
         isRunning = running;
     }
+
+
 
 
 }

@@ -1,8 +1,10 @@
 package de.wowlordnick2;
 
 import de.wowlordnick2.commands.CallEvent;
+import de.wowlordnick2.commands.TimerEventCommand;
 import de.wowlordnick2.commands.startEvent;
 import de.wowlordnick2.events.TestEvent;
+import de.wowlordnick2.utils.Enums.EventsDifficulties;
 import de.wowlordnick2.utils.EventsManger;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,6 +14,8 @@ public final class Main extends JavaPlugin {
     private static Main instance;
 
     private static String prefix;
+    public static EventsDifficulties difficulties;
+
 
     @Override
     public void onEnable() {
@@ -24,7 +28,7 @@ public final class Main extends JavaPlugin {
 
         getCommand("event").setExecutor(new CallEvent());
         getCommand("startevent").setExecutor(new startEvent());
-
+        getCommand("timer").setExecutor(new TimerEventCommand());
 
         prefix = color("&a&lEvent Sytem &8» &7");
     }
@@ -50,5 +54,9 @@ public final class Main extends JavaPlugin {
     // 5. Get the prefix of the plugin
     public static String getPrefix() {
         return prefix;
+    }
+
+    public static void setDifficulties(EventsDifficulties difficulties) {
+        Main.difficulties = difficulties;
     }
 }

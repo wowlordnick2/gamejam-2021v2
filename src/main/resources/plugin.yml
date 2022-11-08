@@ -16,3 +16,9 @@ commands:
     aliases: [s]
     permission: "start.start"
     permission-message: "§cDu hast keine Rechte um das Spiel zu starten!"
+
+  timer:
+    description: "Startet den Timer"
+    aliases: [t]
+    permission: "timer.start"
+    permission-message: "§cDu hast keine Rechte um den Timer zu starten!"

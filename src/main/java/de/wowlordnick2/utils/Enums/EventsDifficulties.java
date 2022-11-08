@@ -2,22 +2,27 @@ package de.wowlordnick2.utils.Enums;
 
 public enum EventsDifficulties {
 
-    FAST(60),
-    NORMAL(300),
-    SLOW(600);
+    FAST(0 , 60),
+    NORMAL(5  , 0 ),
+    SLOW(10 , 0);
 
 
-    EventsDifficulties(int nextEventTime) {
+    EventsDifficulties(int min , int sec) {
 
-        this.nextEventTime = nextEventTime;
-
+        this.min = min;
+        this.sec = sec;
 
     }
 
     //next Event Time in seconds
-    private int nextEventTime;
+    private int min;
+    private int sec;
 
-    public int getNextEventTime() {
-        return nextEventTime;
+    public int getMin() {
+        return min;
+    }
+
+    public int getSec() {
+        return sec;
     }
 }
