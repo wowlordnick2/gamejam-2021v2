@@ -15,13 +15,6 @@ die Situation verschlimmern. Dabei denkt man sich manchmal: Okay I din't see thi
 Der erste Spieler, mit drei Punkten gewinnt.
 Eine Runde kann mit:
 
-/start <normal>
-----
-Bei /start kommen alle 5minuten ein Event 
-
-/start fast 
-----
-Bei /start kommen alle Minute ein Event
 
 
 ## Warum wurde das gecodet ?
