@@ -2,6 +2,7 @@ package de.wowlordnick2.commands;
 
 import de.wowlordnick2.Main;
 import de.wowlordnick2.utils.Enums.EventsDifficulties;
+import de.wowlordnick2.utils.PlayerMangment;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,17 +38,21 @@ public class startEvent implements CommandExecutor , TabCompleter {
 
                     player.sendMessage(prefix +  "started " + EventsDifficulties.FAST.toString());
 
+                    PlayerMangment.playerList.add(player);
+
+
                 } else if (args[0].equalsIgnoreCase(EventsDifficulties.NORMAL.toString())) {
                     player.sendMessage(prefix +  "started " + EventsDifficulties.NORMAL.toString());
-
+                    PlayerMangment.playerList.add(player);
                 } else if (args[0].equalsIgnoreCase(EventsDifficulties.SLOW.toString())) {
                     player.sendMessage(prefix +  "started " + EventsDifficulties.SLOW.toString());
-
+                    PlayerMangment.playerList.add(player);
                 } else {
                     player.sendMessage(Main.color(prefix + "&cThis event does not exist"));
 
 
                 }
+
 
             }
 

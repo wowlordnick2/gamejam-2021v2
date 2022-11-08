@@ -44,8 +44,6 @@ public abstract class EventsManger {
             @Override
             public void run() {
 
-
-
                 if (i > 5) {
                     cancel();
 
