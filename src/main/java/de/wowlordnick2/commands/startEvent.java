@@ -1,7 +1,8 @@
 package de.wowlordnick2.commands;
 
 import de.wowlordnick2.Main;
-import de.wowlordnick2.utils.Enums.EventsDifficulties;
+import de.wowlordnick2.utils.Enums.EventTimer;
+import de.wowlordnick2.utils.InventoryManger;
 import de.wowlordnick2.utils.PlayerMangment;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,35 +29,32 @@ public class startEvent implements CommandExecutor , TabCompleter {
 
             if (args.length == 0) {
                 player.sendMessage(Main.color(prefix + "&cPlease use /startEvent <difficulty>"));
+                player.openInventory(InventoryManger.openInventory());
+
+
                 return true;
             }
 
 
             if (args.length == 1) {
 
-                if (args[0].equalsIgnoreCase(EventsDifficulties.FAST.toString())) {
+                if (args[0].equalsIgnoreCase(EventTimer.FAST.toString())) {
 
-                    player.sendMessage(prefix +  "started " + EventsDifficulties.FAST.toString());
+                    player.sendMessage(prefix +  "started " + EventTimer.FAST.toString());
 
                     PlayerMangment.playerList.add(player);
 
 
-                } else if (args[0].equalsIgnoreCase(EventsDifficulties.NORMAL.toString())) {
-                    player.sendMessage(prefix +  "started " + EventsDifficulties.NORMAL.toString());
+                } else if (args[0].equalsIgnoreCase(EventTimer.NORMAL.toString())) {
+                    player.sendMessage(prefix +  "started " + EventTimer.NORMAL.toString());
                     PlayerMangment.playerList.add(player);
-                } else if (args[0].equalsIgnoreCase(EventsDifficulties.SLOW.toString())) {
-                    player.sendMessage(prefix +  "started " + EventsDifficulties.SLOW.toString());
+                } else if (args[0].equalsIgnoreCase(EventTimer.SLOW.toString())) {
+                    player.sendMessage(prefix +  "started " + EventTimer.SLOW.toString());
                     PlayerMangment.playerList.add(player);
                 } else {
                     player.sendMessage(Main.color(prefix + "&cThis event does not exist"));
-
-
                 }
-
-
             }
-
-
         } else {
             sender.sendMessage(prefix + "You must be a player to use this command");
         }
@@ -73,7 +71,7 @@ public class startEvent implements CommandExecutor , TabCompleter {
 
       List<String> list = new ArrayList<>();
 
-      for (EventsDifficulties eventsDifficulties : EventsDifficulties.values()) {
+      for (EventTimer eventsDifficulties : EventTimer.values()) {
         list.add(eventsDifficulties.toString());
       }
 

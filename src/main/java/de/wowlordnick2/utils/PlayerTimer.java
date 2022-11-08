@@ -38,13 +38,14 @@ public class PlayerTimer {
                         } else {
                             sec++;
                         }
+
+                        //RUN the timer down
                     } else {
                         if (sec == 0) {
                             sec = 59;
                             min--;
                         } else if (min == 0) {
                             sec = 59;
-                            sec--;
                         } else if (hour == 0) {
                             hour = 0;
                             min = 59;

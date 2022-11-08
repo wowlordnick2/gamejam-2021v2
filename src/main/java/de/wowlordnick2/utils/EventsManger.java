@@ -1,7 +1,10 @@
 package de.wowlordnick2.utils;
 
 import de.wowlordnick2.Main;
+import de.wowlordnick2.utils.Enums.Eventdifficulties;
+import de.wowlordnick2.utils.Enums.Role;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
@@ -63,6 +66,8 @@ public abstract class EventsManger {
      */
     public abstract String eventTitle();
 
+    public abstract Eventdifficulties getDifficulty();
+
     /**
      * Return the value of the event (positive or negative)
      */
@@ -74,6 +79,22 @@ public abstract class EventsManger {
      * Return the ItemStack of the event
      */
     public abstract ItemStack itemStack(); //coming soon
+
+    //get the Event Author
+    public static String author(Role role , String name) {
+
+       switch (role) {
+
+           case TEAM:
+               return Main.color("&cTeam:" + name);
+           case SYSTEM:
+                return Main.color("&cProjektleitung: " + name);
+           case USER:
+                return Main.color("&cUser: " + name);
+       }
+
+       return null;
+    }
 
     /**
      *  1. Register a new event
@@ -115,9 +136,10 @@ public abstract class EventsManger {
         Random random = new Random();
         int randomEvent = random.nextInt(events.size());
 
-        EventsManger eventsManger = events.get(randomEvent);
-        eventsManger.onEnable();
-        eventsManger.onDisable();
+
+
+
+
 
 
     }

@@ -1,13 +1,14 @@
 package de.wowlordnick2.utils.Enums;
 
-public enum EventsDifficulties {
+public enum EventTimer {
 
     FAST(0 , 60),
+
     NORMAL(5  , 0 ),
     SLOW(10 , 0);
 
 
-    EventsDifficulties(int min , int sec) {
+    EventTimer(int min , int sec) {
 
         this.min = min;
         this.sec = sec;

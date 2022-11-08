@@ -4,7 +4,7 @@ import de.wowlordnick2.commands.CallEvent;
 import de.wowlordnick2.commands.TimerEventCommand;
 import de.wowlordnick2.commands.startEvent;
 import de.wowlordnick2.events.TestEvent;
-import de.wowlordnick2.utils.Enums.EventsDifficulties;
+import de.wowlordnick2.utils.Enums.EventTimer;
 import de.wowlordnick2.utils.EventsManger;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,7 +14,7 @@ public final class Main extends JavaPlugin {
     private static Main instance;
 
     private static String prefix;
-    public static EventsDifficulties difficulties;
+    public static EventTimer difficulties;
 
 
     @Override
@@ -56,7 +56,7 @@ public final class Main extends JavaPlugin {
         return prefix;
     }
 
-    public static void setDifficulties(EventsDifficulties difficulties) {
+    public static void setDifficulties(EventTimer difficulties) {
         Main.difficulties = difficulties;
     }
 }
