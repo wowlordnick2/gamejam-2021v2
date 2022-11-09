@@ -4,6 +4,7 @@ import de.wowlordnick2.Main;
 import de.wowlordnick2.utils.Enums.Eventdifficulties;
 import de.wowlordnick2.utils.EventsManger;
 import de.wowlordnick2.utils.PlayerMangment;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,9 +15,12 @@ import java.util.Arrays;
 public class MLGEvent extends EventsManger {
     @Override
     public void onEnable() {
+
         System.out.println("Event started " + eventTitle() + " " + positive() +  " "  + getDifficulty());
         sendBossBar();
-
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            player.sendMessage(Main.color(Main.getPrefix() + "Event started " + eventTitle() +  " Score: " + positive() + " Difficulty: " + getDifficulty() + " author: " + getAuthor()));
+        });
 
         PlayerMangment.playerList.forEach(player -> {
 

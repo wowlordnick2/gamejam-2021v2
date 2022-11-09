@@ -3,6 +3,7 @@ package de.wowlordnick2;
 import de.wowlordnick2.commands.CallEvent;
 import de.wowlordnick2.commands.TimerEventCommand;
 import de.wowlordnick2.commands.startEvent;
+import de.wowlordnick2.events.Abbau;
 import de.wowlordnick2.events.MLGEvent;
 import de.wowlordnick2.events.TestEvent;
 import de.wowlordnick2.events.TestEvent2;
@@ -37,6 +38,7 @@ public final class Main extends JavaPlugin {
         EventsManger.registerEvents(new TestEvent());
         EventsManger.registerEvents(new TestEvent2());
         EventsManger.registerEvents(new MLGEvent());
+        EventsManger.registerEvents(new Abbau());
 
 
         getCommand("event").setExecutor(new CallEvent());
@@ -65,6 +67,10 @@ public final class Main extends JavaPlugin {
         System.out.println("Plugin stopped");
 
        EventsManger.unregisterEvents(new TestEvent());
+       EventsManger.unregisterEvents(new TestEvent2());
+       EventsManger.unregisterEvents(new MLGEvent());
+       EventsManger.unregisterEvents(new Abbau());
+
     }
 
 
