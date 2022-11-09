@@ -2,18 +2,19 @@ package de.wowlordnick2.utils;
 
 import de.wowlordnick2.Main;
 import de.wowlordnick2.utils.Enums.Eventdifficulties;
-import de.wowlordnick2.utils.Enums.Role;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public abstract class EventsManger {
@@ -81,20 +82,9 @@ public abstract class EventsManger {
     public abstract ItemStack itemStack(); //coming soon
 
     //get the Event Author
-    public static String author(Role role , String name) {
+    public abstract String getAuthor();
 
-       switch (role) {
-
-           case TEAM:
-               return Main.color("&cTeam:" + name);
-           case SYSTEM:
-                return Main.color("&cProjektleitung: " + name);
-           case USER:
-                return Main.color("&cUser: " + name);
-       }
-
-       return null;
-    }
+    public abstract String getdescription();
 
     /**
      *  1. Register a new event
@@ -172,6 +162,30 @@ public abstract class EventsManger {
 
     }
 
+
+    public ItemStack getItemStack(Material material , String eventname , boolean positiv , Eventdifficulties event , String author) {
+
+        ItemStack itemStack = new ItemStack(material);
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        itemMeta.setDisplayName(ChatColor.RED + eventname);
+
+
+        //set the lore of the item with Role and is the Positiv or Negativ Event and the difficulty
+        itemMeta.setLore(Arrays.asList(
+                "\n",
+                ChatColor.GRAY + "von " +  ChatColor.DARK_AQUA + author,
+                ChatColor.GRAY + "Positiv: " + ChatColor.DARK_AQUA + positiv,
+                ChatColor.GRAY + "Schwierigkeit: " + ChatColor.DARK_AQUA + event,
+                "\n",
+                ChatColor.GRAY + "Klicke um die Description zu sehen"
+        ));
+
+        itemStack.setItemMeta(itemMeta);
+
+        return itemStack;
+    }
 
 
 

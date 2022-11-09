@@ -2,6 +2,8 @@ package de.wowlordnick2.commands;
 
 import de.wowlordnick2.Main;
 import de.wowlordnick2.utils.Enums.EventTimer;
+import de.wowlordnick2.utils.Enums.Eventdifficulties;
+import de.wowlordnick2.utils.EventsManger;
 import de.wowlordnick2.utils.InventoryManger;
 import de.wowlordnick2.utils.PlayerMangment;
 import org.bukkit.command.Command;
@@ -31,7 +33,6 @@ public class startEvent implements CommandExecutor , TabCompleter {
                 player.sendMessage(Main.color(prefix + "&cPlease use /startEvent <difficulty>"));
                 player.openInventory(InventoryManger.openInventory());
 
-
                 return true;
             }
 
@@ -43,6 +44,8 @@ public class startEvent implements CommandExecutor , TabCompleter {
                     player.sendMessage(prefix +  "started " + EventTimer.FAST.toString());
 
                     PlayerMangment.playerList.add(player);
+
+
 
 
                 } else if (args[0].equalsIgnoreCase(EventTimer.NORMAL.toString())) {

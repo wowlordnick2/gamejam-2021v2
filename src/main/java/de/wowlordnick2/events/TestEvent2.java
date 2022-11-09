@@ -9,45 +9,35 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import javax.management.relation.Role;
-import java.awt.*;
 import java.util.Arrays;
 
-public class TestEvent extends EventsManger {
+public class TestEvent2 extends EventsManger {
 
     @Override
     public void onEnable() {
         System.out.println("Event started " + eventTitle() + " " + positive() +  " "  + getDifficulty());
-        sendBossBar();
+
         Bukkit.getOnlinePlayers().forEach(player -> {
             player.sendMessage(Main.color(Main.getPrefix() + "Event started " + eventTitle() +  " Score: " + positive() + " Difficulty: " + getDifficulty() + " author: " + getAuthor()));
         });
-
+        sendBossBar();
         onDisable();
     }
 
-
+    @Override
     public String eventTitle() {
-        return "Test Event";
+        return "Test Event 2";
     }
 
-
-    //return the difficulty of the event
     @Override
     public Eventdifficulties getDifficulty() {
-
-        return Eventdifficulties.EASY;
-    }
-
-
-    public static boolean positive() {
-        return true;
+        return Eventdifficulties.HARD;
     }
 
     @Override
     public ItemStack itemStack() {
 
-        return getItemStack(Material.DIAMOND , eventTitle() , positive() , getDifficulty() , getAuthor());
+        return getItemStack(Material.ACACIA_LEAVES , eventTitle() , positive() , getDifficulty() , getAuthor());
     }
 
     @Override
@@ -57,7 +47,6 @@ public class TestEvent extends EventsManger {
 
     @Override
     public String getdescription() {
-        return "Test Event 1";
+        return "Test Event 2";
     }
 }
-

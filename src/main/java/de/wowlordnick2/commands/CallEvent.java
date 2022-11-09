@@ -73,40 +73,15 @@ public class CallEvent implements CommandExecutor , TabCompleter {
 
         if (args.length == 1) {
 
-            int id;
-
-            try {
-                id = Integer.parseInt(args[0]);
-
-                if (id > EventsManger.events.size()) {
-                   list.clear();
-                   list.add("This event does not exist");
-                   return list;
-                }
-                for (int i = 0; i < EventsManger.events.size(); i++) {
-                    list.add(String.valueOf(i));
-                }
-
-
-            } catch (NumberFormatException e) {
-
-                list.clear();
-                list.add(Main.color("&cThis is not a number (" + args[0] + ")"));
-            }
-
-
-
-
-            return list;
-        } else if (args.length == 0) {
-
             for (int i = 0; i < EventsManger.events.size(); i++) {
+
                 list.add(String.valueOf(i));
+
             }
-            return list;
+
+
         }
 
-
-        return null;
+        return list;
     }
 }

@@ -7,18 +7,16 @@ public class EventTimer {
 
     public static boolean isRunning = false;
 
-    private static int sec = 0;
-    private static int min = 0;
+    private static int sec;
+    private static int min;
 
-    public void startTimer() {
+    public static void startTimer() {
         isRunning = true;
 
         sec = Main.difficulties.getSec();
         min = Main.difficulties.getMin();
 
         new BukkitRunnable() {
-
-
 
             @Override
             public void run() {
