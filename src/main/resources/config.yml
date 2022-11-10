@@ -1,0 +1,39 @@
+WarmupTimer:
+  sec: 0
+  min: 5
+
+Settings:
+
+  ## If the timer should be count up or down (available: up, down)
+  timer: UP
+
+Game:
+  ## the game will start when the player count is equal to or greater than this number
+  minPlayers: 2
+  forcestart: false
+
+Goal:
+
+  # the goal of the game available values:
+  #"ITEMS" , "BLOCKS" , "MOBS" , "ADVANCEDMENT" , "LOCATION" , "STRUCTURES" of value is not set,
+  # the game will automatically choose a random goal
+
+  goal: ITEMS
+
+  finditemcounttowin: 1
+  findblockcounttowin: 1
+  findmobcounttowin: 1
+  findadvancementcounttowin: 1
+  findlocationcounttowin: 1
+  findstructurecounttowin: 1
+
+
+
+Stats:
+  ## the stats will be saved in this file
+  file: stats.yml
+
+
+
+
+

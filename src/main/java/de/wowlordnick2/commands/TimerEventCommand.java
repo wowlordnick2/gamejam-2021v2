@@ -1,5 +1,7 @@
 package de.wowlordnick2.commands;
 
+import de.wowlordnick2.utils.Enums.Timer;
+import de.wowlordnick2.utils.EventTimer;
 import de.wowlordnick2.utils.PlayerTimer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,6 +10,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class TimerEventCommand implements CommandExecutor {
+
+   //This command is used to start the timer for debugging
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
@@ -27,6 +32,9 @@ public class TimerEventCommand implements CommandExecutor {
                        PlayerTimer.setTimer(0 , 0 , 0);
                        PlayerTimer.Timer();
                        PlayerTimer.setRunning(true);
+
+                       EventTimer.startTimer(Timer.FAST);
+
                    } else if (args[0].equalsIgnoreCase("stop")) {
                           PlayerTimer.setRunning(false);
                    } else if (args[0].equalsIgnoreCase("reset")) {

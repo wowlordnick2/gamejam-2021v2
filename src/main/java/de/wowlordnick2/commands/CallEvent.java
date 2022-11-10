@@ -1,7 +1,7 @@
 package de.wowlordnick2.commands;
 
 import de.wowlordnick2.Main;
-import de.wowlordnick2.utils.EventsManger;
+import de.wowlordnick2.manger.EventsManger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,7 +33,7 @@ public class CallEvent implements CommandExecutor , TabCompleter {
                     id = Integer.parseInt(args[0]);
                 } catch(NumberFormatException ex){ // handle your exception
 
-                  player.sendMessage(Main.color(Main.getPrefix() + "&cThis is not a number"));
+                  player.sendMessage(Main.color(Main.getPrefix() + "&cDas ist keine Zahl!"));
 
                   return true;
                 }
@@ -43,13 +43,15 @@ public class CallEvent implements CommandExecutor , TabCompleter {
 
                     EventsManger.callEvent(id);
                 } else {
-                    sender.sendMessage(Main.color(Main.getPrefix() + "&cThis event does not exist"));
+                    sender.sendMessage(Main.color(Main.getPrefix() + "&cDas Event mit der ID " + id + " existiert nicht!"));
                     return true;
                 }
 
 
 
 
+            } else {
+                sender.sendMessage(Main.color(Main.getPrefix() + "&cNutze /callEvent <id>"));
             }
 
 

@@ -59,7 +59,7 @@ public class PlayerTimer {
                 }
                 if (showTimer) {
                     Bukkit.getOnlinePlayers().forEach(player -> {
-                        player.sendActionBar(Component.text(Main.color("&7Timer: &e" + hour + ":" + min + ":" + sec  + EventTimer.getEventTimer())));
+                        player.sendActionBar(Component.text(Main.color("&7Timer: &e" + hour + ":" + min + ":" + sec )));
                     });
 
                 }

@@ -2,14 +2,14 @@ package de.wowlordnick2;
 
 import de.wowlordnick2.commands.CallEvent;
 import de.wowlordnick2.commands.TimerEventCommand;
-import de.wowlordnick2.commands.startEvent;
-import de.wowlordnick2.events.Abbau;
+import de.wowlordnick2.commands.forcestart;
+import de.wowlordnick2.commands.startCommand;
 import de.wowlordnick2.events.MLGEvent;
 import de.wowlordnick2.events.TestEvent;
 import de.wowlordnick2.events.TestEvent2;
 import de.wowlordnick2.listener.InventoryClick;
-import de.wowlordnick2.utils.Enums.EventTimer;
-import de.wowlordnick2.utils.EventsManger;
+import de.wowlordnick2.manger.EventsManger;
+import de.wowlordnick2.utils.Enums.Difficulties;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -23,10 +23,16 @@ public final class Main extends JavaPlugin {
     private static Main instance;
 
     private static String prefix;
-    public static EventTimer difficulties;
+    public static Difficulties difficulties;
 
     public File file = new File(getDataFolder(), "config.yml");
     public YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+
+
+
+
+
+
 
     @Override
     public void onEnable() {
@@ -38,12 +44,12 @@ public final class Main extends JavaPlugin {
         EventsManger.registerEvents(new TestEvent());
         EventsManger.registerEvents(new TestEvent2());
         EventsManger.registerEvents(new MLGEvent());
-        EventsManger.registerEvents(new Abbau());
 
 
         getCommand("event").setExecutor(new CallEvent());
-        getCommand("startevent").setExecutor(new startEvent());
         getCommand("timer").setExecutor(new TimerEventCommand());
+        getCommand("startevent").setExecutor(new startCommand());
+        getCommand("forcestart").setExecutor(new forcestart());
 
         PluginManager manger = Bukkit.getPluginManager();
 
@@ -56,7 +62,13 @@ public final class Main extends JavaPlugin {
 
         if (!file.exists()) {
             saveDefaultConfig();
+
+            getConfig().options().copyDefaults(true);
+
+            saveConfig();
         }
+
+
 
 
     }
@@ -69,7 +81,6 @@ public final class Main extends JavaPlugin {
        EventsManger.unregisterEvents(new TestEvent());
        EventsManger.unregisterEvents(new TestEvent2());
        EventsManger.unregisterEvents(new MLGEvent());
-       EventsManger.unregisterEvents(new Abbau());
 
     }
 
@@ -88,7 +99,7 @@ public final class Main extends JavaPlugin {
         return prefix;
     }
 
-    public static void setDifficulties(EventTimer difficulties) {
+    public static void setDifficulties(Difficulties difficulties) {
         Main.difficulties = difficulties;
     }
 }

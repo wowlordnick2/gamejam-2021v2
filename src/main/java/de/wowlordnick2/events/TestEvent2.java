@@ -1,15 +1,11 @@
 package de.wowlordnick2.events;
 
 import de.wowlordnick2.Main;
-import de.wowlordnick2.utils.Enums.Eventdifficulties;
-import de.wowlordnick2.utils.EventsManger;
+import de.wowlordnick2.utils.Enums.Difficulties;
+import de.wowlordnick2.manger.EventsManger;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.Arrays;
 
 public class TestEvent2 extends EventsManger {
 
@@ -30,8 +26,8 @@ public class TestEvent2 extends EventsManger {
     }
 
     @Override
-    public Eventdifficulties getDifficulty() {
-        return Eventdifficulties.HARD;
+    public Difficulties getDifficulty() {
+        return Difficulties.HARD;
     }
 
     @Override
@@ -46,7 +42,7 @@ public class TestEvent2 extends EventsManger {
     }
 
     @Override
-    public String getdescription() {
+    public String getDescription() {
         return "Test Event 2";
     }
 }

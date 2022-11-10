@@ -1,48 +1,51 @@
 package de.wowlordnick2.utils;
 
 import de.wowlordnick2.Main;
+import de.wowlordnick2.utils.Enums.Difficulties;
+import de.wowlordnick2.utils.Enums.Timer;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.io.DataOutputStream;
 
 public class EventTimer {
 
     public static boolean isRunning = false;
 
-    private static int sec;
-    private static int min;
 
-    public static void startTimer() {
+
+    /**
+     * Start the event timer with the given timer enum
+     * @param timer
+     */
+    public static void startTimer(Timer timer) {
+        final int[] sec = {timer.getSec()};
+        final int[] min = {timer.getMin()};
+
         isRunning = true;
-
-        sec = Main.difficulties.getSec();
-        min = Main.difficulties.getMin();
-
         new BukkitRunnable() {
-
             @Override
             public void run() {
 
-                if (sec == 0) {
-                    sec = 59;
-                    min--;
-                } else if (min == 0) {
-                    sec = 59;
-                    sec--;
-                } else if (sec == 0 && min == 0) {
-                    cancel();
-                } else {
-                    sec--;
+                if (isRunning) {
+                    if (sec[0] == 0 && min[0] == 0) {
+                        sec[0] = 59;
+                        min[0]--;
+                    } else if (sec[0] == 0) {
+                        sec[0] = 59;
+                        min[0]--;
+                    }
+                    if (min[0] == 0 && sec[0] == 0) {
+                        Bukkit.broadcastMessage("§cDer Timer ist abgelaufen!");
+                        cancel();
+                        isRunning = false;
+                    }
                 }
-
-
-
-            }
+                }
         }.runTaskTimerAsynchronously(Main.getInstance(), 0, 20);
 
 
     }
 
-    public static String getEventTimer() {
-        return "Nächstes Event in " + min + ":" + sec;
-    }
 
 }

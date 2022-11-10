@@ -1,16 +1,14 @@
 package de.wowlordnick2.events;
 
 import de.wowlordnick2.Main;
-import de.wowlordnick2.utils.Enums.Eventdifficulties;
-import de.wowlordnick2.utils.EventsManger;
+import de.wowlordnick2.utils.Enums.Difficulties;
+import de.wowlordnick2.manger.EventsManger;
 import de.wowlordnick2.utils.PlayerMangment;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
 
 public class MLGEvent extends EventsManger {
     @Override
@@ -50,8 +48,8 @@ public class MLGEvent extends EventsManger {
     }
 
     @Override
-    public Eventdifficulties getDifficulty() {
-        return Eventdifficulties.NORMAL;
+    public Difficulties getDifficulty() {
+        return Difficulties.NORMAL;
     }
 
     @Override
@@ -65,7 +63,7 @@ public class MLGEvent extends EventsManger {
     }
 
     @Override
-    public String getdescription() {
+    public String getDescription() {
         return "Bei diesem Event wird der Spieler auf die 100 Y Koordinate hin teleportiert und muss ein Wasser MLG machen. "  + "\n" + "Im Nether bekommt der Spieler ein Boot";
     }
 }

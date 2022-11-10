@@ -1,7 +1,7 @@
-package de.wowlordnick2.utils;
+package de.wowlordnick2.manger;
 
 import de.wowlordnick2.Main;
-import de.wowlordnick2.utils.Enums.Eventdifficulties;
+import de.wowlordnick2.utils.Enums.Difficulties;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -67,7 +67,7 @@ public abstract class EventsManger {
      */
     public abstract String eventTitle();
 
-    public abstract Eventdifficulties getDifficulty();
+    public abstract Difficulties getDifficulty();
 
     /**
      * Return the value of the event (positive or negative)
@@ -84,7 +84,9 @@ public abstract class EventsManger {
     //get the Event Author
     public abstract String getAuthor();
 
-    public abstract String getdescription();
+    public abstract String getDescription();
+
+
 
     /**
      *  1. Register a new event
@@ -163,7 +165,7 @@ public abstract class EventsManger {
     }
 
 
-    public ItemStack getItemStack(Material material , String eventname , boolean positiv , Eventdifficulties event , String author) {
+    public ItemStack getItemStack(Material material , String eventname , boolean positiv , Difficulties event , String author) {
 
         ItemStack itemStack = new ItemStack(material);
 
