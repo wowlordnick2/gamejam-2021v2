@@ -1,9 +1,12 @@
 package de.wowlordnick2.commands;
 
+import de.wowlordnick2.Main;
 import de.wowlordnick2.manger.TimerManger;
 import de.wowlordnick2.utils.Enums.Difficulties;
+import de.wowlordnick2.utils.Enums.Messages;
 import de.wowlordnick2.utils.Enums.Timer;
 import de.wowlordnick2.utils.Enums.TimerState;
+import de.wowlordnick2.utils.PlayerMangment;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Difficulty;
 import org.bukkit.command.Command;
@@ -44,16 +47,17 @@ public class startCommand implements CommandExecutor , TabCompleter {
 
                         TimerState state = TimerState.WARMUP;
                         TimerManger.warmUpTimer(Timer.SLOW);
+                        PlayerMangment.playerList.add(player);
 
                     } else if (Timer.FAST.name().equalsIgnoreCase(args[0])) {
 
-                            TimerState state = TimerState.WARMUP;
-                            TimerManger.warmUpTimer(Timer.FAST);
-
-                        } else if (Timer.NORMAL.name().equalsIgnoreCase(args[0])) {
-
-                            TimerState state = TimerState.WARMUP;
-                            TimerManger.warmUpTimer(Timer.NORMAL);
+                        TimerState state = TimerState.WARMUP;
+                        TimerManger.warmUpTimer(Timer.FAST);
+                        PlayerMangment.playerList.add(player);
+                    } else if (Timer.NORMAL.name().equalsIgnoreCase(args[0])) {
+                        TimerState state = TimerState.WARMUP;
+                        TimerManger.warmUpTimer(Timer.NORMAL);
+                        PlayerMangment.playerList.add(player);
 
                         } else {
 
@@ -66,6 +70,8 @@ public class startCommand implements CommandExecutor , TabCompleter {
 
             }
 
+        } else {
+            sender.sendMessage(Main.color(Messages.CONOSLEN_MESSAGE.getMessage()));
         }
 
 

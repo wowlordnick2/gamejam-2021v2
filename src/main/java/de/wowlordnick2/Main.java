@@ -1,13 +1,10 @@
 package de.wowlordnick2;
 
-import de.wowlordnick2.commands.CallEvent;
-import de.wowlordnick2.commands.TimerEventCommand;
-import de.wowlordnick2.commands.forcestart;
-import de.wowlordnick2.commands.startCommand;
-import de.wowlordnick2.events.MLGEvent;
-import de.wowlordnick2.events.TestEvent;
-import de.wowlordnick2.events.TestEvent2;
+import de.wowlordnick2.commands.*;
+import de.wowlordnick2.events.*;
+import de.wowlordnick2.listener.CommandPre;
 import de.wowlordnick2.listener.InventoryClick;
+import de.wowlordnick2.manger.ConfigManger;
 import de.wowlordnick2.manger.EventsManger;
 import de.wowlordnick2.utils.Enums.Difficulties;
 import org.bukkit.Bukkit;
@@ -15,8 +12,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 public final class Main extends JavaPlugin {
 
@@ -32,8 +31,6 @@ public final class Main extends JavaPlugin {
 
 
 
-
-
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -41,25 +38,56 @@ public final class Main extends JavaPlugin {
 
         System.out.println("Plugin started");
 
-        EventsManger.registerEvents(new TestEvent());
-        EventsManger.registerEvents(new TestEvent2());
+
+        File file = ConfigManger.points;
+
+        if (!file.exists()) {
+
+            ConfigManger.createConfig(file);
+            ConfigManger.save(file , ConfigManger.pointsConfig);
+
+        }
+
+        Logger.getLogger("Minecraft").info("Points saved");
+
+
+
+
         EventsManger.registerEvents(new MLGEvent());
+        EventsManger.registerEvents(new BobEvent());
+        EventsManger.registerEvents(new TimerOut());
+        EventsManger.registerEvents(new AlleineEvent());
+        EventsManger.registerEvents(new InstantBurnEvent());
+        EventsManger.registerEvents(new AntistaerkungEvent());
 
 
+        /**
+         * Register the commands
+         */
+        getCommand("join").setExecutor(new joinCommand());
+        getCommand("leave").setExecutor(new leave());
         getCommand("event").setExecutor(new CallEvent());
         getCommand("timer").setExecutor(new TimerEventCommand());
         getCommand("startevent").setExecutor(new startCommand());
         getCommand("forcestart").setExecutor(new forcestart());
+        getCommand("menu").setExecutor(new menuCommand());
 
+
+        /**
+         * Register the listener
+         */
         PluginManager manger = Bukkit.getPluginManager();
-
         manger.registerEvents(new InventoryClick(), this);
+        manger.registerEvents(new CommandPre(), this);
+        manger.registerEvents(new InstantBurnEvent() , this);
 
         prefix = color("&a&lEvent Sytem &8» &7");
 
         getLogger().info("Load " + EventsManger.getEvents().size() + " Events");
 
-
+        /**
+         * Load the config file
+         */
         if (!file.exists()) {
             saveDefaultConfig();
 
@@ -67,6 +95,23 @@ public final class Main extends JavaPlugin {
 
             saveConfig();
         }
+        if (getResource("config.yml") != null)  {
+
+            getConfig().options().copyDefaults(true);
+            saveDefaultConfig();
+        }
+
+
+        String token = getConfig().getString("Discord.token");
+        System.out.println(token);
+
+
+
+
+
+
+
+
 
 
 
@@ -78,9 +123,15 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
         System.out.println("Plugin stopped");
 
-       EventsManger.unregisterEvents(new TestEvent());
-       EventsManger.unregisterEvents(new TestEvent2());
        EventsManger.unregisterEvents(new MLGEvent());
+       EventsManger.unregisterEvents(new BobEvent());
+       EventsManger.unregisterEvents(new TimerOut());
+       EventsManger.unregisterEvents(new AlleineEvent());
+
+
+
+
+
 
     }
 
@@ -101,5 +152,12 @@ public final class Main extends JavaPlugin {
 
     public static void setDifficulties(Difficulties difficulties) {
         Main.difficulties = difficulties;
+    }
+
+
+    @NotNull
+    @Override
+    public YamlConfiguration getConfig() {
+        return config;
     }
 }

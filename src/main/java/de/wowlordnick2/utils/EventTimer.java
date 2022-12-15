@@ -37,6 +37,8 @@ public class EventTimer {
                     }
                     if (min[0] == 0 && sec[0] == 0) {
                         Bukkit.broadcastMessage("§cDer Timer ist abgelaufen!");
+
+
                         cancel();
                         isRunning = false;
                     }

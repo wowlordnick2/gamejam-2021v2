@@ -20,4 +20,6 @@ public enum Goal {
     public String getName() {
         return name;
     }
+
+
 }

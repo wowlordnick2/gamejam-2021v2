@@ -2,6 +2,7 @@ package de.wowlordnick2.commands;
 
 import de.wowlordnick2.Main;
 import de.wowlordnick2.manger.TimerManger;
+import de.wowlordnick2.utils.Enums.Messages;
 import de.wowlordnick2.utils.Enums.TimerState;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -14,6 +15,11 @@ public class forcestart implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
+        if (!(sender instanceof Player)){
+
+            sender.sendMessage(Main.color(Messages.CONOSLEN_MESSAGE.getMessage()));
+
+        }
 
        if (sender instanceof Player) {
 
@@ -25,19 +31,21 @@ public class forcestart implements CommandExecutor {
 
                    if (Main.getInstance().config.getBoolean("Game.forcestart")) {
 
-                      Bukkit.broadcastMessage(Main.color(Main.getPrefix() + " Der Forcestart wurde aktiviert! Das Event startet in 15 Sekunden!"));
+                      Bukkit.broadcastMessage(Main.color(Main.getPrefix() + "Der Forcestart wurde aktiviert! Das Game startet in 15 Sekunden!"));
                       TimerManger.setSec(15);
                       TimerManger.setMin(0);
 
                      } else {
-                          player.sendMessage("§cDer Forcestart ist deaktiviert!");
+                          player.sendMessage(Main.color(Main.getPrefix() + "&cDer Forcestart ist deaktiviert!"));
 
-                   }
+                      }
 
+               } else {
+                   player.sendMessage(Main.color(Main.getPrefix() + "&cBitte benutze /forcestart!"));
                }
 
            } else {
-               player.sendMessage("§cBitte benutze /forcestart");
+               player.sendMessage(Main.color(Messages.PLAYER_NOPERM.getMessage()));
            }
 
 

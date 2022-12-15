@@ -9,6 +9,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -72,9 +73,7 @@ public abstract class EventsManger {
     /**
      * Return the value of the event (positive or negative)
      */
-    public static boolean positive() {
-        return false;
-    }
+    public abstract boolean positive();
 
     /**
      * Return the ItemStack of the event
@@ -86,6 +85,15 @@ public abstract class EventsManger {
 
     public abstract String getDescription();
 
+    /**
+     * @return has the event have an option to change values
+     */
+    public abstract boolean isOption();
+
+    /**
+     * @return the inventory of the event
+     */
+    public abstract Inventory getInventory();
 
 
     /**
@@ -128,6 +136,8 @@ public abstract class EventsManger {
         Random random = new Random();
         int randomEvent = random.nextInt(events.size());
 
+        events.get(randomEvent).onEnable();
+
 
 
 
@@ -143,7 +153,6 @@ public abstract class EventsManger {
 
         EventsManger eventsManger = events.get(id);
         eventsManger.onEnable();
-        eventsManger.onDisable();
 
 
     }
@@ -177,7 +186,7 @@ public abstract class EventsManger {
         //set the lore of the item with Role and is the Positiv or Negativ Event and the difficulty
         itemMeta.setLore(Arrays.asList(
                 "\n",
-                ChatColor.GRAY + "von " +  ChatColor.DARK_AQUA + author,
+                ChatColor.GRAY + "von " +  ChatColor.DARK_AQUA + author + ChatColor.GRAY + " (" +  ChatColor.DARK_AQUA + "Discord Tag" + ChatColor.GRAY + ")",
                 ChatColor.GRAY + "Positiv: " + ChatColor.DARK_AQUA + positiv,
                 ChatColor.GRAY + "Schwierigkeit: " + ChatColor.DARK_AQUA + event,
                 "\n",
@@ -189,6 +198,32 @@ public abstract class EventsManger {
         return itemStack;
     }
 
+    public ItemStack getItemStack(Material material , String eventname , boolean positiv , Difficulties event , String author , boolean optionmenu) {
 
+        ItemStack itemStack = new ItemStack(material);
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        itemMeta.setDisplayName(ChatColor.RED + eventname);
+
+
+        //set the lore of the item with Role and is the Positiv or Negativ Event and the difficulty
+        itemMeta.setLore(Arrays.asList(
+                "\n",
+                ChatColor.GRAY + "von " +  ChatColor.DARK_AQUA + author + ChatColor.GRAY + " (" +  ChatColor.DARK_AQUA + "Discord Tag" + ChatColor.GRAY + ")",
+                ChatColor.GRAY + "Positiv: " + ChatColor.DARK_AQUA + positiv,
+                ChatColor.GRAY + "Schwierigkeit: " + ChatColor.DARK_AQUA + event,
+                "\n",
+                ChatColor.GRAY + "Shift + Klicke um die Description zu sehen",
+                ChatColor.GRAY + "Klicke um die Optionen zu sehen"
+        ));
+
+
+
+
+        itemStack.setItemMeta(itemMeta);
+
+        return itemStack;
+    }
 
 }

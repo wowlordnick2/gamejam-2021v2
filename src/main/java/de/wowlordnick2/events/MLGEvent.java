@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class MLGEvent extends EventsManger {
@@ -16,9 +17,6 @@ public class MLGEvent extends EventsManger {
 
         System.out.println("Event started " + eventTitle() + " " + positive() +  " "  + getDifficulty());
         sendBossBar();
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            player.sendMessage(Main.color(Main.getPrefix() + "Event started " + eventTitle() +  " Score: " + positive() + " Difficulty: " + getDifficulty() + " author: " + getAuthor()));
-        });
 
         PlayerMangment.playerList.forEach(player -> {
 
@@ -34,7 +32,7 @@ public class MLGEvent extends EventsManger {
 
             }
 
-            player.sendMessage(Main.color(Main.getPrefix() + "Event started " + eventTitle() +  " Score: " + positive() + " Difficulty: " + getDifficulty() + " author: " + getAuthor()));
+
         });
 
 
@@ -53,6 +51,11 @@ public class MLGEvent extends EventsManger {
     }
 
     @Override
+    public boolean positive() {
+        return false;
+    }
+
+    @Override
     public ItemStack itemStack() {
         return getItemStack(Material.WATER_BUCKET , eventTitle() , positive() , getDifficulty() , getAuthor());
     }
@@ -65,5 +68,15 @@ public class MLGEvent extends EventsManger {
     @Override
     public String getDescription() {
         return "Bei diesem Event wird der Spieler auf die 100 Y Koordinate hin teleportiert und muss ein Wasser MLG machen. "  + "\n" + "Im Nether bekommt der Spieler ein Boot";
+    }
+
+    @Override
+    public boolean isOption() {
+        return false;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return null;
     }
 }

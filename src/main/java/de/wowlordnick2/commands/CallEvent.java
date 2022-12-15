@@ -2,6 +2,7 @@ package de.wowlordnick2.commands;
 
 import de.wowlordnick2.Main;
 import de.wowlordnick2.manger.EventsManger;
+import de.wowlordnick2.utils.Enums.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,10 +22,17 @@ public class CallEvent implements CommandExecutor , TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
+
+        if (!(sender instanceof Player)){
+
+            sender.sendMessage(Main.color(Messages.CONOSLEN_MESSAGE.getMessage()));
+
+        }
+
+
         if (sender.hasPermission("wowlordnick2.event")) {
 
             if (args.length == 1) {
-
                 Player player = (Player) sender;
 
                 int id;
